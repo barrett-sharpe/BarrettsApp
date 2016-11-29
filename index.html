@@ -23,21 +23,21 @@
     <script>
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 41.850033, lng: -87.6500523},
+          center: {lat: 10.75876, lng:-85.37543}, //Re-centered to match TestFusionTable data.
           zoom: 11
         });
 
         var layer = new google.maps.FusionTablesLayer({
           query: {
-            select: '\'Geocodable address\'',
-            from: '1mZ53Z70NsChnBMm-qEYmSDOvLXgrreLTkQUvvg'
+            select: '\'latitude\'',
+            from: '1AsUm0q7On37oX5FRlKD7RpVZNn6u3s15vQs0Xxyv' //TestFusionTable
           }
         });
         layer.setMap(map);
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAem8cDhy0mYPxomP-AbcxDuPxzAjCB5MU&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGwoLfVRs3CZ-A0aq9fDgoSpjGdMzUXYw&callback=initMap"> //My API Key
     </script>
   </body>
 </html>
