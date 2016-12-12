@@ -25,13 +25,12 @@ html, body, #googft-mapCanvas {
     google.maps.visualRefresh = true;
 
     //(NOT WORKING; null) Determine if mobile viewer, and print to console
-    /*
     var isMobile = (navigator.userAgent.toLowerCase().indexOf('android') > -1) || (navigator.userAgent.match(/(iPod|iPhone|iPad|BlackBerry|Windows Phone|iemobile)/));
     console.log(isMobile);
     var mapDiv = document.getElementById('googft-mapCanvas');
     mapDiv.style.width = isMobile ? '100%' : '500px';
     mapDiv.style.height = isMobile ? '100%' : '300px';
-    */
+    
 
     var map = new google.maps.Map(mapDiv, {
       center: new google.maps.LatLng(37.96423617407523, 86.38053000000002),
