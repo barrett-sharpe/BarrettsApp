@@ -58,7 +58,8 @@ html, body, #googft-mapCanvas {
    google.maps.event.addDomListener(document.getElementById('style'),
             'change', function() {
               var selectedStyle = this.value;
-              layer.set('styleId', selectedStyle);
+              //layer.set('styleId', selectedStyle);
+              layer.set('where', selectedStyle);
               console.log(selectedStyle); //log it
             });
 
@@ -80,8 +81,8 @@ html, body, #googft-mapCanvas {
     <br>
     <label>Select style:</label>
       <select id="style">
-        <option value="1">Red markers</option>
-        <option value="2">Blue markers</option>
+        <option value="Height (m) > 50">Less than 50m</option>
+        <option value="Height (m) >= 50">Greater than 50m</option>
       </select>
     <form>
       <label>Field 1:</label>
