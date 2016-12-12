@@ -88,6 +88,7 @@
         google.maps.visualRefresh = true;
         var isMobile = (navigator.userAgent.toLowerCase().indexOf('android') > -1) ||
           (navigator.userAgent.match(/(iPod|iPhone|iPad|BlackBerry|Windows Phone|iemobile)/));
+        console.log(isMobile);
         if (isMobile) {
           var viewport = document.querySelector("meta[name=viewport]");
           viewport.setAttribute('content', 'initial-scale=1.0, user-scalable=no');
