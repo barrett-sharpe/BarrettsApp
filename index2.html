@@ -26,7 +26,7 @@ html, body, #googft-mapCanvas {
 
     //(NOT WORKING; null) Determine if mobile viewer, and print to console
     var isMobile = (navigator.userAgent.toLowerCase().indexOf('android') > -1) || (navigator.userAgent.match(/(iPod|iPhone|iPad|BlackBerry|Windows Phone|iemobile)/));
-    console.log(isMobile.toString());
+    console.log(isMobile); //no toSting in case of null
 
     var mapDiv = document.getElementById('googft-mapCanvas');
     mapDiv.style.width = isMobile ? '100%' : '500px';
