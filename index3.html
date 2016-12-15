@@ -64,27 +64,37 @@
             'change', function() {
               updateMap();
         });
+
+        //'supportsOnline' Listener
+        google.maps.event.addDomListener(document.getElementById('supportsOnline'),
+            'change', function() {
+              updateMap();
+        });
+
       }//Initialize
 
       // Update the query sent to the Fusion Table Layer based on user selection.
       function updateMap() {
+        
         //Collect selection values
         var cityValue = document.getElementById('city').value;
         var radiusValue = document.getElementById('radius').value;
         var supportsOnlineValue = document.getElementById('supportsOnline').value;
         var query = "";
         
-        //Set 'city section of query
+        //Set city section of query
         if (cityValue!="Any City") {
           query += "'City' = '" + cityValue + "' ";
         }
 
-        //Set 'radius section of query
+        //Set 'radius section of query, and update label
+        document.getElementById("displayRadius").innerHTML = radiusValue;
+                
         query += "radius stuff "+radiusValue+" ";
         //'ST_INTERSECTS(Address, CIRCLE(LATLNG(37.4, -122.1), 5000))'
                   
         //Set 'supportsOnline section of query
-        if (supportsOnlineValue) {
+        if(document.getElementById("supportsOnline").checked){
           query += "'OnlineSupport' = 'Yes' ";
         }
 
@@ -129,10 +139,13 @@
     </select>
     
     <!--Radius Selection, Range-->
+    <br>
     <label>Radius:</label>
     <input id='radius' type='Range' min='5' max='100' step='5' value='25'/>
+    <label id='displayRadius'></label>
 
     <!--Radius Selection, Range-->
+    <br>
     <label>Can Support An Online Exam:</label>
     <input id='supportsOnline' type='checkbox' name='supportsOnline'/>
   </body>
