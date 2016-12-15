@@ -105,9 +105,9 @@
         //Set 'radius section of query, and update label
         document.getElementById("displayRadius").innerHTML = radiusValue;
         if(query.length!=0){
-            query+="AND ";
+        //    query+="AND ";
         }        
-        query += "ST_INTERSECTS("+"Address"+", "+"CIRCLE(LATLNG(49.887836, -119.496592)"+", "+radius+")) ";                  
+        //query += "ST_INTERSECTS("+"Address"+", "+"CIRCLE(LATLNG(49.887836, -119.496592)"+", "+radiusValue+")) ";                  
         
 
         //Print query to console:
