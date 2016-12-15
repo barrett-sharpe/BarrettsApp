@@ -37,9 +37,9 @@
       var layer;
       
       var tableId = '1vHtd2HTIiWmfZBfunHoRkTvuJoTG8UXabitBsgok';
-      var cityColumn = 'City';
-      var radiusColumn = 'Radius';
-      var onlineColumn = 'OnlineSupport';
+      var cityColumn = "City";
+      var onlineColumn = "OnlineSupport";
+      var addressColumn = "Address";
 
       //Maps Default Initialization method.    
       function initialize() {
@@ -116,7 +116,7 @@
         //Update layer with query
         layer.setOptions({
             query: {
-              select: cityColumn,
+              select: ""+cityColumn+", "+OnlineSupport+", "+addressColumn,
               from: tableId,
               where: ""+query+""
             }
