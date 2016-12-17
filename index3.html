@@ -166,7 +166,15 @@
         });
 
         //Update circle radius
-        //circle.setRadius(radiusValue);
+        //circle.setRadius(radiusValue); //not valid update method
+        circle.setOptions({
+          center: new google.maps.LatLng(City[cityValue][0], City[cityValue][1]),
+          radius: radiusValue,
+          map: map,
+          fillOpacity: 0.4,
+          strokeOpacity: 0.7,
+          strokeWeight: 1
+        });
 
         //Print out record of selection
         console.log("Record for: "+cityValue+"\n"+"Latitide: "+City[cityValue][0]+", Longitude: "+City[cityValue][1]+".\n");
