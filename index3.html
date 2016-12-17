@@ -59,7 +59,7 @@
         //Create Map. Default Location is Kelowna
         map = new google.maps.Map(document.getElementById('map-canvas'), {
           center: new google.maps.LatLng(49.887836, -119.496592),
-          zoom: 6,
+          zoom: 7,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
@@ -104,6 +104,7 @@
         
         //Initial radiusValue NaN
         if(isNaN(radiusValue)){
+          console.log("RadiusValue is not a number.");
           radiusValue=10;
         }
 
