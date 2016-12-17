@@ -59,7 +59,7 @@
         //Create Map. Default Location is Kelowna
         map = new google.maps.Map(document.getElementById('map-canvas'), {
           center: new google.maps.LatLng(49.887836, -119.496592),
-          zoom: 3,
+          zoom: 6,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
@@ -102,6 +102,11 @@
         var supportsOnlineValue = document.getElementById('supportsOnline').value;
         var query = "";
         
+        //Initial radiusValue NaN
+        if(isNan(radiusValue)){
+          radiusValue=10;
+        }
+
         //Set city section of query
         if (cityValue!="Any City") {
           query += "City = '" + cityValue + "' ";
