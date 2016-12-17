@@ -33,14 +33,26 @@
     <script type="text/javascript">
 
       //Global Script varaibles
+      //Google Maps
       var map;
       var layer;
-      
+      var circle;
+      //Fusion Table
       var tableId = '1vHtd2HTIiWmfZBfunHoRkTvuJoTG8UXabitBsgok';
       var cityColumn = "City";
       var onlineColumn = "OnlineSupport";
       var addressColumn = "Address";
-
+      //City Coordinate Table
+      var City = {
+        'Default' : [49.887836, -119.496592], //Kelowna Default
+        '100 Mile' : [51.644127, -121.295124],
+        'Abbotsford' : [49.050339, -122.304451],
+        'Burnaby' : [49.248775, -122.980531],
+        'Kelowna' : [49.887836, -119.496592], //!@# ctd here
+      };
+      //City.name[0] - Lat
+      //City.name[0] - Lng
+      
       //Maps Default Initialization method.    
       function initialize() {
 
@@ -78,6 +90,7 @@
               updateMap();
         });
 
+
       }//Initialize
 
       // Update the query sent to the Fusion Table Layer based on user selection.
@@ -103,6 +116,7 @@
         }
 
         //Set 'radius section of query, and update label
+        //!@#THIS NEEDS TO BE FIXED
         document.getElementById("displayRadius").innerHTML = radiusValue;
         if(query.length!=0){
         //    query+="AND ";
@@ -121,6 +135,19 @@
               where: ""+query+""
             }
         });
+
+        //Update circle on map Element
+        circle = new google.maps.Circle({
+          center: new google.maps.LatLng(37.4, -122.1),
+          radius: radiusValue,
+          map: map,
+          fillOpacity: 0.1,
+          strokeOpacity: 0.3,
+          strokeWeight: 1
+        });
+        
+        //Print out record of selection
+        console.log("Record for: "+cityValue+"\n"+"Latitide: "+City[cityValue][0]+", Longitude: "+City[cityValue][1]+".\n");
 
       }//updateMap
 
