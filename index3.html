@@ -212,9 +212,7 @@
         if(query.length!=0){
             query+="AND ";
         }
-        var latlat=Coord[City.indexOf(cityValue)][0];
-        var lnglng=Coord[City.indexOf(cityValue)][1];
-        query += "ST_INTERSECTS("+"Address"+", "+"CIRCLE(LATLNG("+latlat+", "+lnglng+")"+", "+radiusValue+")) ";                  
+        query += "ST_INTERSECTS("+"Address"+", "+"CIRCLE(LATLNG("+Coord[City.indexOf(cityValue)][0]+", "+Coord[City.indexOf(cityValue)][1]+")"+", "+radiusValue+")) "; 
         
 
         //Print query to console:
@@ -234,7 +232,7 @@
         //Update circle radius
         //circle.setRadius(radiusValue); //not valid update method
         circle.setOptions({
-          center: new google.maps.LatLng(City[cityValue][0], City[cityValue][1]),
+          center: new google.maps.LatLng(Coord[City.indexOf(cityValue)][0], Coord[City.indexOf(cityValue)][1]),
           radius: radiusValue,
           map: map,
           fillOpacity: 0.4,
@@ -243,7 +241,7 @@
         });
 
         //Print out record of selection
-        console.log("Record for: "+cityValue+"\n"+"Latitide: "+City[cityValue][0]+", Longitude: "+City[cityValue][1]+".\n");
+        console.log("Record for: "+cityValue+"\n"+"Latitide: "+Coord[City.indexOf(cityValue)][0]+", Longitude: "+Coord[City.indexOf(cityValue)][1]+".\n");
 
       }//updateMap
 
