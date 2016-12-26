@@ -112,7 +112,7 @@
 
 
 
-      //Print to console
+      //BEGINNING TABLE TEST
       console.log("Beginning Table Test:\n");
       var city = "100 Mile"
       console.log("Coordinates for "+city+" are:\n");
@@ -212,8 +212,8 @@
         if(query.length!=0){
             query+="AND ";
         }
-        var latlat=City[cityValue][0];
-        var lnglng=City[cityValue][1];        
+        var latlat=Coord[City.indexOf(cityValue)][0];
+        var lnglng=Coord[City.indexOf(cityValue)][1];
         query += "ST_INTERSECTS("+"Address"+", "+"CIRCLE(LATLNG("+latlat+", "+lnglng+")"+", "+radiusValue+")) ";                  
         
 
