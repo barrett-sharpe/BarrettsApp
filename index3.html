@@ -117,7 +117,7 @@
       var city = "100 Mile"
       console.log("Coordinates for "+city+" are:\n");
       console.log("Latitude: "+Coord[City.indexOf(city)][0]+"\nLogitude: "+Coord[City.indexOf(city)][1]);
-      console.log("\n-------------------------");
+      console.log("-------------------------");
 
 
 
@@ -248,7 +248,7 @@
         //create new circle
         circle = new google.maps.Circle({
           center: new google.maps.LatLng(Coord[City.indexOf(cityValue)][0], Coord[City.indexOf(cityValue)][1]),
-          radius: radiusValue,
+          radius: parseInt(radiusValue), //parseInt reccomended//!@#
           map: map,
           fillColor: '#FF0000',
           fillOpacity: 0.4,
@@ -266,6 +266,19 @@
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   </head>
+
+
+
+
+
+
+<!--/////////////////////////////////////////////////////////////////////////////-->
+
+
+
+
+
+
 
   <body>
 
