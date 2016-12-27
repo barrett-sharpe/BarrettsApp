@@ -147,7 +147,7 @@
         //Create Layer
         layer = new google.maps.FusionTablesLayer({
           query: {
-            select: "'"+cityColumn+"', '"+addressColumn+"', '"+onlineColumn+"', '"+"Latitude"+"'",
+            select: ""+cityColumn+", "+addressColumn+", "+onlineColumn+", "+"Latitude"+"",
             from: tableId,
           },
           map: map,
@@ -218,17 +218,21 @@
         var query = "";
 
         //Set city section of query
+        /*
         if (cityValue!="Any City") {
           query += "City = '" + cityValue + "' ";
         }
+        */
 
         //Set 'supportsOnline section of query
+        /*
         if(document.getElementById("supportsOnline").checked){
           if(query.length!=0){
             query+="AND ";
           }
           query += "OnlineSupport = 'Yes' ";
         }
+        */
 
         //Set 'radius section of query, and update label
         
@@ -236,8 +240,8 @@
         if(query.length!=0){
             query+="AND ";
         }
-        //query += "ST_INTERSECTS("+"'Address'"+", "+"CIRCLE(LATLNG("+Coord[City.indexOf(cityValue)][0]+", "+Coord[City.indexOf(cityValue)][1]+")"+", "+radiusValue+")) "; //Original. Address not seeming to be working
-        query += "ST_DISTANCE("+"'Latitude'"+", "+"CIRCLE(LATLNG("+Coord[City.indexOf(cityValue)][0]+", "+Coord[City.indexOf(cityValue)][1]+")"+", "+radiusValue+")) ";
+        query += "ST_INTERSECTS("+"'Address'"+", "+"CIRCLE(LATLNG("+Coord[City.indexOf(cityValue)][0]+", "+Coord[City.indexOf(cityValue)][1]+")"+", "+radiusValue+")) "; //Original. Address not seeming to be working
+        //query += "ST_DISTANCE("+"'Latitude'"+", "+"CIRCLE(LATLNG("+Coord[City.indexOf(cityValue)][0]+", "+Coord[City.indexOf(cityValue)][1]+")"+", "+radiusValue+")) ";
 
         //Print query to console:
         console.log("Query:"+query+".");
@@ -247,7 +251,7 @@
         //Update layer with query
         layer.setOptions({
             query: {
-              select: "'"+cityColumn+"', '"+addressColumn+"', '"+onlineColumn+"', '"+"Latitude"+"'",
+              select: ""+cityColumn+", "+addressColumn+", "+onlineColumn+", "+"Latitude"+"",
               from: tableId,
               where: ""+query+""
             }
