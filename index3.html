@@ -38,6 +38,10 @@
       var map;
       var layer;
       var circle;
+      //Filters
+      var cityValue;
+      var radiusValue;
+      var supportsOnlineValue;
       //Fusion Table
       var tableId = '1vHtd2HTIiWmfZBfunHoRkTvuJoTG8UXabitBsgok';
       var cityColumn = "City";
@@ -58,7 +62,7 @@
         [51.644127, -121.295124],
         [49.050339, -122.304451],
         [49.248775, -122.980531],
-        [49.887836, -119.496592],
+        [49.887836, -119.496592], //!@#Change to Kamloops from Kelowna
       ];
 
 /*
@@ -184,9 +188,9 @@
       function updateMap() {
         
         //Collect selection values
-        var cityValue = document.getElementById('city').value;
-        var radiusValue = document.getElementById('radius').value;
-        var supportsOnlineValue = document.getElementById('supportsOnline').value;
+        cityValue = document.getElementById('city').value;
+        radiusValue = document.getElementById('radius').value;
+        supportsOnlineValue = document.getElementById('supportsOnline').value;
         var query = "";
 
         //Set city section of query
@@ -247,6 +251,24 @@
 
       //Add the window DOM listener to initialize 
       google.maps.event.addDomListener(window, 'load', initialize);
+    
+    
+    //Function to recenter google maps element on the selected city
+    function centerOnCity(){
+      if(cityValue!="Any City"){
+        map.setCenter(new google.maps.LatLng(Coord[City.indexOf(cityValue)][0], Coord[City.indexOf(cityValue)][1]));
+        map.setZoom(11);
+      }else{
+        map.setCenter(new google.maps.LatLng(49.248775, -122.9805312));
+        map.setZoom(11);
+      }
+      //console
+      console.log("Re-Center Clicked.");
+    }//function
+    
+    
+    
+    
     </script>
   </head>
 
@@ -284,7 +306,7 @@
       <option value="Burnaby">Burnaby</option>
       <option value="Kamloops">Kamloops</option>
     </select>
-    
+    <button id="centerButton" type="button" onclick="centerOnCity"> 
     <!--Radius Selection, Range, meters(m)-->
     <br>
     <label>Radius:</label>
