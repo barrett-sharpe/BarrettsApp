@@ -147,7 +147,7 @@
         //Create Layer
         layer = new google.maps.FusionTablesLayer({
           query: {
-            select: "'"+cityColumn+"', '"+addressColumn+"', '"+onlineColumn+"'",
+            select: "'"+cityColumn+"', '"+addressColumn+"', '"+onlineColumn+"', '"+"Latitude"+"'",
             from: tableId,
           },
           map: map,
@@ -247,7 +247,7 @@
         //Update layer with query
         layer.setOptions({
             query: {
-              select: "'"+cityColumn+"', '"+addressColumn+"', '"+onlineColumn+"'",
+              select: "'"+cityColumn+"', '"+addressColumn+"', '"+onlineColumn+"', '"+"Latitude"+"'",
               from: tableId,
               where: ""+query+""
             }
