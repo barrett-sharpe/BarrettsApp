@@ -274,19 +274,40 @@
       google.maps.event.addDomListener(window, 'load', initialize);
     
     
-    //Function to recenter google maps element on the selected city
-    function centerOnCity(){
-      if(cityValue!="Any City"){
-        map.setCenter(new google.maps.LatLng(Coord[City.indexOf(cityValue)][0], Coord[City.indexOf(cityValue)][1]));
-        map.setZoom(11);
-      }else{
-        map.setCenter(new google.maps.LatLng(49.248775, -122.9805312));
-        map.setZoom(9);
+      //Function to recenter google maps element on the selected city
+      function centerOnCity(){
+        if(cityValue!="Any City"){
+          map.setCenter(new google.maps.LatLng(Coord[City.indexOf(cityValue)][0], Coord[City.indexOf(cityValue)][1]));
+          map.setZoom(11);
+        }else{
+          map.setCenter(new google.maps.LatLng(49.248775, -122.9805312));
+          map.setZoom(9);
+        }
+        //console
+        console.log("Re-Center Clicked.");
       }
-      //console
-      console.log("Re-Center Clicked.");
-    }//function
     
+      //Function to clear eleents of the form
+      function clearForm(section){
+        if(section==1){
+          //Invigilation Center Information
+          document.getElementById('centerName').value="";
+          document.getElementById('centerAddress').value="";
+        }
+        if(section==2){
+          //Examinee Information
+          document.getElementById('firstName').value="";
+          document.getElementById('lastName').value="";
+          document.getElementById('phone').value="";
+          document.getElementById('email').value="";
+        }
+        if(section==3){
+          //Institution Information
+        }
+        if(section==4){
+          //Exam Information
+        }
+      }//clear
     
     
     
@@ -342,28 +363,49 @@
 
 
 
-    <!--Form Elements-->
+    <!--Form Elements (Don't forget to add required)-->
     <br>
     <hr>
     <br>
     <form>
       <h3>Invigilation Center Information</h3>
+      <button id="clear1" type="button" onclick="clearForm(1);">Clear Section</button>
 
-      <label>Invigilation Center Name:</label>
-      <input id="centerName" type="text" placeholder="Center Name" maxlength="150" size="100"><br>
-      <label>Center Address:</label>
-      <input id="centerAddress" type="text" placeholder="Center Address" maxlength="150" size="100"><br>
-      
+      <label>Center Name:</label>
+      <input id="centerName" type="text" placeholder="Center Name" maxlength="150" size="75"><br>
+      <label>Center Street Address:</label>
+      <input id="centerStreetAddress" type="text" placeholder="Center Street Address" maxlength="150" size="75"><br>
+      <label>Center City:</label>
+      <input id="centerAddress" type="text" placeholder="Center City" maxlength="150" size="75"><br>
+      <label>Center Province:</label>
+      <select id="centerProvince">
+        <option value="British_Columbia">British Columbia</option>
+        <option value="Alberta">Alberta</option>
+        <option value="Sasketchewan">Sasketchewan</option>
+        <option value="Manitoba">Manitoba</option>
+        <option value="Ontario">Ontario</option>
+        <option value="Quebec">Quebec</option>
+        <option value="Nova_Scotia">Nova Scotia</option>
+        <option value="Newfoundland_and_Labrador">Newfoundland and Labrador</option>
+        <option value="New_Brunswick">New Brunswick</option>
+        <option value="Prince_Edward_Island">Prince Edward Island</option>
+        <option value="Yukon">Yukon</option>
+        <option value="Northwest_Territories">Northwest Territories</option>
+        <option value="Nunavut">Nunavut</option>
+      </select>
+
+
       <h3>Examinee Information</h3>
+      <button id="clear2" type="button" onclick="clearForm(2);">Clear Section</button>
 
       <label>First Name:</label>
-      <input id="firstName" type="text" placeholder="First Name" maxlength="25" required><br>
+      <input id="firstName" type="text" placeholder="First Name" maxlength="25"><br>
       <label>Last Name:</label>
-      <input id="firstName" type="text" placeholder="First Name" maxlength="25" required><br>
+      <input id="lastName" type="text" placeholder="Last Name" maxlength="25"><br>
       <label>Phone:</label>
-      <input id="firstName" type="text" placeholder="First Name" maxlength="25" required><br>
+      <input id="phone" type="text" placeholder="First Name" maxlength="25"><br>
       <label>Email:</label>
-      <input id="firstName" type="text" placeholder="First Name" maxlength="40" required><br>
+      <input id="email" type="text" placeholder="First Name" maxlength="40"><br>
       <label>Exam Date (First Choice):</label>
       <br>
       <label>Exam Date (Second Choice):</label>
@@ -372,11 +414,12 @@
       <br>
 
       <h3>Institutional Information</h3>
+      <button id="clear3" type="button" onclick="clearForm(3);">Clear Section</button>
 
       <label>School Name:</label>
-      <input id="firstName" type="text" placeholder="First Name" maxlength="25" required><br>
+      <br>
       <label>Street Address:</label>
-      <input id="firstName" type="text" placeholder="First Name" maxlength="25" required><br>
+      <br>
       <label>City:</label>
       <br>
       <label>Province:</label>
@@ -387,6 +430,7 @@
       <br>
 
       <h3>Exam Information</h3>
+      <button id="clear4" type="button" onclick="clearForm(4);">Clear Section</button>
 
       <label>Course Number:</label>
       <br>
