@@ -143,7 +143,12 @@
             select: "'"+cityColumn+"', '"+addressColumn+"', '"+onlineColumn+"'",
             from: tableId,
           },
-          map: map
+          map: map,
+          styles: [{
+            markerOptions: {
+              iconName: "orange_blank" //visit: https://fusiontables.google.com/DataSource?docid=1BDnT5U1Spyaes0Nj3DXciJKa_tuu7CzNRXWdVA#map:id=3 //for a list of all styles
+            }
+          }]
         });
 
         //Create circle (Burnaby Default)
@@ -157,6 +162,14 @@
           strokeWeight: 1,
           strokeColor: '#FF0000',
         });
+
+
+        //DOM LISTENERS
+
+        //point listener Test
+        google.maps.event.addListener(points, 'click', function(event) {
+          alert("lat:"+ event.latLng.lat());
+        }); 
 
         //'radius' Listener
         google.maps.event.addDomListener(document.getElementById('radius'),
@@ -175,6 +188,7 @@
             'change', function() {
               updateMap();
         });
+
 
 
       }//Initialize
