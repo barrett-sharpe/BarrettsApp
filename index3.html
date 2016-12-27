@@ -172,7 +172,7 @@
 
         //DOM LISTENERS
 
-        //!@#form filler
+        //Fill Form Listener
         google.maps.event.addListener(layer, 'click', function(event) {
           //alert("lat:"+ event.latLng.lat()); //from: https://developers.google.com/maps/documentation/javascript/reference?csw=1#FusionTablesMouseEvent
           fillForm(event.row);
@@ -335,9 +335,11 @@
     <p><a href="index2.html">Click here to go back to index2</a></p>
     
     <!--Map Element-->
+    <hr>
     <div id="map-canvas"></div>
-    
+    <hr>
 
+    <h3>Filter Criteria:</h3>
     <!--City Selection-->
     <label>City:</label>
     <select id="city">
