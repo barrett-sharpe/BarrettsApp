@@ -126,9 +126,10 @@
 
       //Function to Fill Form
       function fillForm(data){
-        console.log("fillForm() Method:\n");
-        console.log("argument data is type: "+typeof(data)+".");
+        //date is type object.
         console.log("The Name is: "+data.Name.value+".");
+        document.getElementById("centerName").innerHTML = data.Name.value;
+        document.getElementById("centerAddress").innerHTML = data.Address.value;
       }
 
 
