@@ -151,6 +151,7 @@
             from: tableId,
           },
           map: map,
+          //suppressInfoWindows: true, //to suppress rendering info window when layer feature clicked
           styles: [{
             markerOptions: {
               iconName: "orange_blank" //visit: https://fusiontables.google.com/DataSource?docid=1BDnT5U1Spyaes0Nj3DXciJKa_tuu7CzNRXWdVA#map:id=3 //for a list of all styles
@@ -270,7 +271,7 @@
 
         //Print out record of selection
         console.log("Record for: "+cityValue+"\n"+"Latitide: "+Coord[City.indexOf(cityValue)][0]+", Longitude: "+Coord[City.indexOf(cityValue)][1]+".\n");
-        console.log("Query is type: "+typeof(layer.query)+"."); //!@#?
+        console.log("query.where is: "+layer.query.where+"."); //!@#?
       }//updateMap
 
       //Add the window DOM listener to initialize 
