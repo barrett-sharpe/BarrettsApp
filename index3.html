@@ -124,7 +124,11 @@
       console.log("-------------------------");
 
 
-
+      //Function to Fill Form
+      function fillForm(data){
+        console.log("fillForm() Method:\n");
+        console.log("argument data is type: "+typeof(data)+".");
+      }
 
 
       //Maps Default Initialization method.    
@@ -166,9 +170,10 @@
 
         //DOM LISTENERS
 
-        //point listener Test
+        //!@#form filler
         google.maps.event.addListener(layer, 'click', function(event) {
-          alert("lat:"+ event.latLng.lat());
+          //alert("lat:"+ event.latLng.lat()); //from: https://developers.google.com/maps/documentation/javascript/reference?csw=1#FusionTablesMouseEvent
+          fillForm(event.row);
         }); 
 
         //'radius' Listener
