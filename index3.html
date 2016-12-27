@@ -188,12 +188,6 @@
         var radiusValue = document.getElementById('radius').value;
         var supportsOnlineValue = document.getElementById('supportsOnline').value;
         var query = "";
-        
-        //Initial radiusValue NaN
-        //if(isNaN(radiusValue)){
-        //  console.log("RadiusValue is not a number.");
-        //  radiusValue=10;
-        //}
 
         //Set city section of query
         if (cityValue!="Any City") {
@@ -209,12 +203,13 @@
         }
 
         //Set 'radius section of query, and update label
+        /*
         document.getElementById("displayRadius").innerHTML = ""+(radiusValue/1000.0)+" kilometers";
         if(query.length!=0){
             query+="AND ";
         }
         query += "ST_INTERSECTS("+"Address"+", "+"CIRCLE(LATLNG("+Coord[City.indexOf(cityValue)][0]+", "+Coord[City.indexOf(cityValue)][1]+")"+", "+radiusValue+")) "; 
-        
+        */
 
         //Print query to console:
         console.log("Query:"+query+".");
@@ -231,21 +226,9 @@
         });
 
         //Update circle radius
-        //circle.setRadius(radiusValue); //not valid update method
-        //!@#Changing circle reset method
-        /*
-        circle.setOptions({
-          center: new google.maps.LatLng(Coord[City.indexOf(cityValue)][0], Coord[City.indexOf(cityValue)][1]),
-          radius: radiusValue,
-          map: map,
-          fillOpacity: 0.4,
-          strokeOpacity: 0.7,
-          strokeWeight: 1
-        });
-        */
-        //Remove Circle
+        //Remove
         circle.setMap(null); //proper way to remove a circle (https://developers.google.com/maps/documentation/javascript/shapes#circles)
-        //create new circle
+        //create new
         circle = new google.maps.Circle({
           center: new google.maps.LatLng(Coord[City.indexOf(cityValue)][0], Coord[City.indexOf(cityValue)][1]),
           radius: parseInt(radiusValue), //parseInt() reqired for variable radius
