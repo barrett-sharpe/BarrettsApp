@@ -31,14 +31,12 @@
 
     <!--Initialize script-->
     <script type="text/javascript">
-      /*
-      Global Script varaibles
-      */
+      /* ----- Global Script varaibles --------- */
       //Google Maps
       var map;
       var layer;
       var circle;
-      //Filters
+      //Filter Values
       var cityValue;
       var radiusValue;
       var supportsOnlineValue;
@@ -47,16 +45,17 @@
       var cityColumn = "City";
       var onlineColumn = "OnlineSupport";
       var addressColumn = "Address";
-      //City Table //Burnaby Default
+      var locationColumn = "Latitude";
+      //City Table //Any City = Burnaby Default
       var City = [
         'Any City',
         '100 Mile House',
         'Abbotsford',
         'Burnaby',
-        'Kamloops'
+        'Kelowna'
       ];
       
-      //Coord Table //Burnaby Default
+      //Coord Table (Any City = Burnaby Default)
       var Coord = [
         [49.248775, -122.980531], 
         [51.644127, -121.295124],
@@ -65,79 +64,20 @@
         [49.887836, -119.496592], //!@#Change to Kamloops from Kelowna
       ];
 
-/*
-      //Coord Table //Coord.city.longitude //DOESNT WORK //ALSO, THERE ARE SYNTAXICAL MISTAKES LIKE KELOWNA INSTEAD OF KAMLOOPS
-      var Coord = {
-        "Any City" : {latitude: 49.248775, longitude: -122.980531}, //Burnaby Default
-        "100 Mile" : {latitude: 51.644127, longitude: -121.295124},
-        "Abbotsford" : {latitude: 49.050339, longitude: -122.304451},
-        "Burnaby" : {latitude: 49.248775, longitude: -122.980531},
-        "Kelowna" : {latitude: 49.887836, longitude: -119.496592},
-      };
-*/       
-      /*
+      /*-------- Functions --------------*/
 
-      //Coord Table
-      var Coord = [
-        "Any City", 49.248775, -122.980531, //Burnaby Default
-        "100 Mile", 51.644127, -121.295124,
-        "Abbotsford", 49.050339, -122.304451,
-        "Burnaby", 49.248775, -122.980531,
-        "Kelowna", 49.887836, -119.496592,
-      ];
-
-      */
-
-
-
-      /*
-
-      //City Table
-      var City = {
-        'Any City' : 0, //Burnaby Default
-        '100 Mile' : 1,
-        'Abbotsford' : 2,
-        'Burnaby' : 3,
-        'Kelowna' : 4,
-      };
-      //Coord Table
-      var Coord = [
-        [49.248775, -122.980531], //Burnaby Default
-        [51.644127, -121.295124],
-        [49.050339, -122.304451],
-        [49.248775, -122.980531],
-        [49.887836, -119.496592],
-      ];
-
-      */
-
-
-
-
-
-
-      //BEGINNING TABLE TEST
-      console.log("------------------\nBeginning Table Test:\n");
-      var city = "100 Mile House"
-      console.log("Coordinates for "+city+" are:\n");
-      console.log("Latitude: "+Coord[City.indexOf(city)][0]+"\nLogitude: "+Coord[City.indexOf(city)][1]);
-      
-      console.log("-------------------------");
-
-
-      //Function to Fill Form
+      //Function to fill Form elements with marker data.
       function fillForm(data){
-        //date is type object.
-        document.getElementById("centerName").value = data.Name.value;
+        document.getElementById("centerName").value = data.Name.value; //data is type object.
         document.getElementById("centerStreetAddress").value = data.Address.value;
         document.getElementById("centerCity").value = data.City.value;
-      }
+      
+      }//fillForm
 
-
-      //Maps Default Initialization method.    
+      //Google Maps Default Initialization method.    
       function initialize() {
 
-        //Create Map. Default Location is Burnaby
+        //Create Map. (Burnaby Default)
         map = new google.maps.Map(document.getElementById('map-canvas'), {
           center: new google.maps.LatLng(49.248775, -122.9805312),
           zoom: 11,
@@ -147,7 +87,7 @@
         //Create Layer ( "where select locationColumn is an existing geocoded column of type location" )
         layer = new google.maps.FusionTablesLayer({
           query: {
-            select: "Latitude",
+            select: locationColumn,
             from: tableId,
           },
           map: map,
@@ -159,7 +99,7 @@
           }]
         });
 
-        //Create circle (Burnaby Default)
+        //Create Circle (Burnaby Default)
         circle = new google.maps.Circle({
           center: new google.maps.LatLng(49.248775, -122.980531),
           radius: 2000,
@@ -173,12 +113,10 @@
         });
 
 
-        //DOM LISTENERS
-
+        //DOM LISTENERS for initialize() method
         //Fill Form Listener
         google.maps.event.addListener(layer, 'click', function(event) {
-          //alert("lat:"+ event.latLng.lat()); //from: https://developers.google.com/maps/documentation/javascript/reference?csw=1#FusionTablesMouseEvent
-          fillForm(event.row);
+          fillForm(event.row); //from: https://developers.google.com/maps/documentation/javascript/reference?csw=1#FusionTablesMouseEvent
         }); 
 
         //'radius' Listener
@@ -199,8 +137,6 @@
               updateMap();
         });
 
-
-
       }//Initialize
 
 
@@ -209,15 +145,12 @@
 
       // Update the query sent to the Fusion Table Layer based on user selection.
       function updateMap() {
-        
+
         //Collect selection values
         cityValue = document.getElementById('city').value;
         radiusValue = document.getElementById('radius').value;
         supportsOnlineValue = document.getElementById('supportsOnline').value;
-        var query = "";
-
-        
-        
+        var query = "";     
         
         //Set 'radius section of query, and update label
         document.getElementById("displayRadius").innerHTML = ""+(radiusValue/1000.0)+" kilometers";
@@ -227,11 +160,6 @@
         query += "ST_INTERSECTS("+"Latitude"+", "+"CIRCLE(LATLNG("+Coord[City.indexOf(cityValue)][0]+", "+Coord[City.indexOf(cityValue)][1]+")"+", "+radiusValue+")) "; //Original. Address not seeming to be working
         //query += "ST_DISTANCE("+"Latitude"+", "+"CIRCLE(LATLNG("+Coord[City.indexOf(cityValue)][0]+", "+Coord[City.indexOf(cityValue)][1]+")"+", "+radiusValue+")) ";
         
-        
-        
-        
-        
-        
         //Set city section of query
         
         if (cityValue!="Any City") {
@@ -240,24 +168,14 @@
           }
           query += "City = '" + cityValue + "' ";
         }
-        
 
         //Set 'supportsOnline section of query
-        
         if(document.getElementById("supportsOnline").checked){
           if(query.length!=0){
             query+="AND ";
           }
           query += "OnlineSupport = 'Yes' ";
         }
-        
-
-        
-
-        //Print query to console:
-        //console.log("Query:"+query+".");
-
-
 
         //Update layer with query
         layer.setOptions({
@@ -268,10 +186,10 @@
             }
         });
 
-        //Update circle radius
-        //Remove
+        //Update Circle Radius
+        //Remove Circle
         circle.setMap(null); //proper way to remove a circle (https://developers.google.com/maps/documentation/javascript/shapes#circles)
-        //create new
+        //Create Circle
         circle = new google.maps.Circle({
           center: new google.maps.LatLng(Coord[City.indexOf(cityValue)][0], Coord[City.indexOf(cityValue)][1]),
           radius: parseInt(radiusValue), //parseInt() reqired for variable radius
@@ -287,26 +205,26 @@
         //Print out record of selection
         console.log("Record for: "+cityValue+"\n"+"Latitide: "+Coord[City.indexOf(cityValue)][0]+", Longitude: "+Coord[City.indexOf(cityValue)][1]+".\n");
         console.log("query.where is: "+layer.query.where+"."); //!@#?
+      
       }//updateMap
 
-      //Add the window DOM listener to initialize 
+      //Adda DOM listener to window to initialize()
       google.maps.event.addDomListener(window, 'load', initialize);
     
     
-      //Function to recenter google maps element on the selected city
+      //Function to recenter google maps element on the selected city.
       function centerOnCity(){
         if(cityValue!="Any City"){
           map.setCenter(new google.maps.LatLng(Coord[City.indexOf(cityValue)][0], Coord[City.indexOf(cityValue)][1]));
           map.setZoom(11);
         }else{
-          map.setCenter(new google.maps.LatLng(49.248775, -122.9805312));
+          map.setCenter(new google.maps.LatLng(Coord[City.indexOf("Any City")][0], Coord[City.indexOf("Any City")][1]));
           map.setZoom(9);
         }
-        //console
         console.log("Re-Center Clicked.");
       }
     
-      //Function to clear eleents of the form
+      //Function to clear elements of the form. //!@#not completed
       function clearForm(section){
         if(section==1){
           //Invigilation Center Information
@@ -331,9 +249,8 @@
           //Exam Information
           console.log("Sec.4 Exam Information [cleared]");
         }
-      }//clear
-    
-    
+
+      }//clearForm  
     
     </script>
   </head>
